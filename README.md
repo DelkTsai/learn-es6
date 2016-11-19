@@ -145,3 +145,35 @@ ES6模块还有以下好处：
 
 ###知识点一：ES6的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";
 
+###知识点二：export命令
+
+输出了三个变量
+
+```js
+// profile.js
+export var firstName = 'Michael';
+export var lastName = 'Jackson';
+export var year = 1958;
+```
+
+输出的一组变量(优先考虑)
+
+```js
+// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export {firstName, lastName, year};
+```
+
+输出函数或类（class）
+
+```js
+export function multiply(x, y) {
+  return x * y;
+};
+```
+
+
+
