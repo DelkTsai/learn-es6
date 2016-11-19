@@ -175,5 +175,56 @@ export function multiply(x, y) {
 };
 ```
 
+需要特别注意的是，export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。
+
+```js
+// 报错
+export 1;
+
+// 报错
+var m = 1;
+export m;
+```
+
+```js
+// 写法一
+export var m = 1;
+
+// 写法二
+var m = 1;
+export {m};
+
+// 写法三
+var n = 1;
+export {n as m};
+```
+
+同样的，function和class的输出，也必须遵守这样的写法。
+
+```js
+// 报错
+function f() {}
+export f;
+
+// 正确
+export function f() {};
+
+// 正确
+function f() {}
+export {f};
+```
+
+另外，export语句输出的接口，与其对应的值是动态绑定关系，即通过该接口，可以取到模块内部实时的值。
+
+```js
+export var foo = 'bar';
+setTimeout(() => foo = 'baz', 500);
+上面代码输出变量foo，值为bar，500毫秒之后变成baz。
+```
+
+这一点与CommonJS规范完全不同。CommonJS模块输出的是值的缓存，不存在动态更新，详见下文《ES6模块加载的实质》一节。
+
+最后，export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。这是因为处于条件代码块之中，就没法做静态优化了，违背了ES6模块的设计初衷。
+
 
 
