@@ -226,5 +226,14 @@ setTimeout(() => foo = 'baz', 500);
 
 最后，export命令可以出现在模块的任何位置，只要处于模块顶层就可以。如果处于块级作用域内，就会报错，下一节的import命令也是如此。这是因为处于条件代码块之中，就没法做静态优化了，违背了ES6模块的设计初衷。
 
+```js
+function foo() {
+  export default 'bar' // SyntaxError export语句放在函数之中，结果报错。
+}
+foo()
+```
+
+###知识点三：import命令
+
 
 
